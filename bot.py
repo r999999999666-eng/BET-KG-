@@ -197,7 +197,8 @@ async def add_favorite(uid, vid):
 async def remove_favorite(uid, vid):
     async with aiosqlite.connect(DB) as db:
         await db.execute("DELETE FROM favorites WHERE user_id=? AND vacancy_id=?", (uid, vid))
-        await db.commit()async def is_favorite(uid, vid) -> bool:
+        await db.commit()
+        async def is_favorite(uid, vid) -> bool:
     async with aiosqlite.connect(DB) as db:
         cur = await db.execute("SELECT 1 FROM favorites WHERE user_id=? AND vacancy_id=?", (uid, vid))
         return await cur.fetchone() is not None
